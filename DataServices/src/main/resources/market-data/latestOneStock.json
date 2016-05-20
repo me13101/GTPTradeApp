@@ -1,0 +1,14 @@
+{
+  "stocklist": [
+    {
+      "name": "Apple Inc",
+      "type": "stock",
+      "data": {
+        "delta": "0.018444",
+        "stock_id": "AAPL",
+        "price": 115.96,
+        "datetime": "2015-10-20 14:55:00"
+      }
+    }
+  ]
+}

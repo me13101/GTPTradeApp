@@ -1,0 +1,378 @@
+#headers {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.glyphicon-arrow-up {
+	color: green;
+}
+#tradeSim{
+	width: 100%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	background-color: #5376C2;
+	color: white;
+}
+/* .glyphicon-arrow-down { */
+/* 	color: red; */
+/* } */
+.up, .glyphicon-arrow-up .glyphicon{
+	color: green;
+}
+.down, .glyphicon-arrow-down .glyphicon{
+	color: red;
+}
+.marketIndices thead {
+	color: white;
+	background-color: #5376C2;
+}
+
+#markPanel {
+	margin: 17px;;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	box-shadow: 5px 5px 5px #888888;
+}
+#portPanel {
+	margin: 17px;;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	box-shadow: 5px 5px 5px #888888;
+}
+#learningPanel {
+	margin: 10px;;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	box-shadow: 5px 5px 5px #888888;
+}
+#leaderboardsPanel {
+	margin: 10px;;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	box-shadow: 5px 5px 5px #888888;
+}
+#connectionsPanel {
+	margin: 10px;;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+
+#portDetails {
+	float: right;
+}
+
+marquee {
+	overflow: hidden;
+}
+
+.table {
+	overflow: auto;
+}
+
+#portTable {
+	width: 50%;
+}
+
+.RecAct {
+	padding-top: 10px;
+}
+
+.increase {
+	color: green;
+}
+
+.static {
+	color: #FFCC00;
+}
+
+.buy {
+	border-radius: 5px;
+	width: 70%;
+	background-color: green;
+	color: white;
+}
+
+.sell {
+	border-radius: 5px;
+	width: 70%;
+	background-color: red;
+	color: white;
+}
+
+.spacer {
+	height: 100px;
+}
+
+.drop {
+	float: right;
+}
+
+.ButtonSpace {
+	height: 20px;
+}
+
+.navhead {
+	height: 50px;
+}
+
+thead {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#responsivePie {
+	height: 200px;
+	width: 33%;
+}
+
+@media screen and (max-width: 1000px) {
+	h1 {
+		font-size: 24px;
+	}
+	.box {
+		width: 322px;
+	}
+	thead {
+		font-size: 18px;
+	}
+	#mobileBuy {
+		width: 50%;
+		float: left;
+	}
+	#mobileSell {
+		width: 50%;
+		float: right;
+	}
+}
+
+.tt-query {
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+	color: #999
+}
+
+.tt-menu { // used to be tt-dropdown-menu in older versions width:422px;
+	margin-top: 4px;
+	padding: 4px 0;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.tt-suggestion {
+	padding: 3px 20px;
+	line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+	color: #fff;
+	background-color: #0097cf;
+}
+
+.tt-suggestion p {
+	margin: 0;
+}
+
+@media screen and (max-width: 750px) {
+	h1 {
+		font-size: 18px;
+	}
+	thead {
+		font-size: 12px;
+	}
+	marquee {
+		display: none
+	}
+	#mobileBuy {
+		width: 50%;
+		float: left;
+	}
+	#mobileSell {
+		width: 50%;
+		float: right;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#tbl {
+	width: 90%;
+	}
+	h1 {
+		font-size: 12px;
+	}
+	thead {
+		font-size: 10px;
+	}
+	marquee {
+		display: none
+	}
+	#welcome {
+		font-size: 18px;
+	}
+	#label {
+		font-weight: bold;
+		font-size: 14px;
+	}
+	#headers {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	#rowfont {
+		font-size: 12px;
+	}
+	#mobileBuy {
+		width: 50%;
+		float: left;
+	}
+	#mobileSell {
+		width: 50%;
+		float: right;
+	}
+	#responsivePie {
+		height: 200px;
+		width: 100%;
+	}
+	#responsiveStk {
+		height: 300px;
+		width: 100%;
+	}
+	#stkchart {
+		height: 300px;
+		width: 100%;
+	}
+	.hc-pie {
+		height: 100px;
+		width: 100%;
+	}
+}
+
+.hr {
+	color: grey;
+}
+
+.leaderboardcolor {
+	background-color: green;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+}
+
+.glyphicon-picture {
+	color: blue;
+	font-size: 3em;
+}
+
+.quizstart{
+	background-color: red;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+}
+
+.quizopen{
+	background-color: blue;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+}
+
+.quizdone{
+	background-color: green;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+}
+
+.uploadphoto{
+	background-color: purple;
+	color: white;
+	width: 10em;
+	border-radius: 24px;
+}
+
+.savebutton{
+	background-color: blue;
+	color: white;
+	width: 10em;
+	border-radius: 24px;
+}
+
+.deletebutton{
+	background-color: red;
+	color: white;
+	width: 10em;
+	border-radius: 24px;
+}
+
+.cancelbutton{
+	background-color: white;
+	color: black;
+	width: 10em;
+	border-radius: 24px;
+}
+
+.glyphicon-green {
+	color: green;
+}
+/* .box{ */
+/* border-style: solid; */
+/* border-width: 1px; */
+/* } */
+.table-title {
+	
+}
+
+.table-borderless td, .table-borderless th {
+	border: 0;
+}
+
+.table th, .table td {
+	border-top: none !important;
+}
+
+.tableboardcolor {
+	border-color: #fff;
+}
+
+
+span.picture {
+    font-size: 10em;
+
+.quizstart{
+  background-color: red;
+  color: white;
+  width: 5em;
+  border-radius: 24px;
+}
+
+.quizopen{
+	background-color: blue;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+}
+
+.quizdone{
+	background-color: green;
+	color: white;
+	width: 5em;
+	border-radius: 24px;
+
+}

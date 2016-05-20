@@ -1,0 +1,332 @@
+{
+  "stocklist": [
+    {
+      "name": "Apple",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Technology",
+      "region": "NA",
+      "ticker": "AAPL"
+    },
+    {
+      "name": "Allegiant Travel Company",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Travel & Leisure",
+      "region": "EU",
+      "ticker": "ALGT"
+    },
+    {
+      "name": "Allianz",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Insurance",
+      "region": "EU",
+      "ticker": "ALVG"
+    },
+    {
+      "name": "APAC Market Index",
+      "assetClass": "Equity",
+      "type": "index",
+      "industry": "ALL",
+      "region": "APAC",
+      "ticker": "APACInd"
+    },
+    {
+      "name": "Aquila Resources Inc",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Financial Services",
+      "region": "APAC",
+      "ticker": "AQAC"
+    },
+    {
+      "name": "Assicurazioni Generali",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Insurance",
+      "region": "EU",
+      "ticker": "ARZGF"
+    },
+    {
+      "name": "Aviva",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Financial Services",
+      "region": "NA",
+      "ticker": "AVV"
+    },
+    {
+      "name": "Bank of America Corp",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Banks",
+      "region": "NA",
+      "ticker": "BAC"
+    },
+    {
+      "name": "Building Construction Authority",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Construction & Materials",
+      "region": "SA",
+      "ticker": "BCA"
+    },
+    {
+      "name": "Continental",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Automobiles & Parts",
+      "region": "EU",
+      "ticker": "CONG"
+    },
+    {
+      "name": "Dow Chemical Co",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Chemicals",
+      "region": "NA",
+      "ticker": "DOW"
+    },
+    {
+      "name": "Eni",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Oil & Gas",
+      "region": "EU",
+      "ticker": "ENI"
+    },
+    {
+      "name": "European Market Index",
+      "assetClass": "Equity",
+      "type": "index",
+      "industry": "ALL",
+      "region": "EU",
+      "ticker": "EUInd"
+    },
+    {
+      "name": "Facebook Inc",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Media",
+      "region": "NA",
+      "ticker": "FB"
+    },
+    {
+      "name": "FIAT Chrysler Automobiles",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Automobiles & Parts",
+      "region": "EU",
+      "ticker": "FCHA"
+    },
+    {
+      "name": "Immobiliere Dassault Sa",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Real Estate",
+      "region": "APAC",
+      "ticker": "FINA"
+    },
+    {
+      "name": "Gamesa Corporacion Tecnologica Sa",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Utilities",
+      "region": "SA",
+      "ticker": "GAM"
+    },
+    {
+      "name": "Huntsman Corp",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Chemicals",
+      "region": "SA",
+      "ticker": "HUN"
+    },
+    {
+      "name": "International Business Machines Corp",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Technology",
+      "region": "NA",
+      "ticker": "IBM"
+    },
+    {
+      "name": "Irish Water Ltd",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Utilities",
+      "region": "EU",
+      "ticker": "IRWT"
+    },
+    {
+      "name": "Johnson & Johnson",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Personal & Household Goods",
+      "region": "NA",
+      "ticker": "JNJ"
+    },
+    {
+      "name": "Kite Pharma",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Health Care",
+      "region": "APAC",
+      "ticker": "KITE"
+    },
+    {
+      "name": "Luxottica",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Retail",
+      "region": "EU",
+      "ticker": "LUX"
+    },
+    {
+      "name": "Mediaset",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Media",
+      "region": "EU",
+      "ticker": "MS"
+    },
+    {
+      "name": "Market Index",
+      "assetClass": "Equity",
+      "type": "index",
+      "industry": "ALL",
+      "region": "Global",
+      "ticker": "MaInd"
+    },
+    {
+      "name": "North American Market Index",
+      "assetClass": "Equity",
+      "type": "index",
+      "industry": "ALL",
+      "region": "NA",
+      "ticker": "NAInd"
+    },
+    {
+      "name": "Nestle",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Food & Beverage",
+      "region": "NA",
+      "ticker": "NESNY"
+    },
+    {
+      "name": "Procter & Gamble",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Personal & Household Goods",
+      "region": "NA",
+      "ticker": "PG"
+    },
+    {
+      "name": "Parmalat",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Food & Beverage",
+      "region": "EU",
+      "ticker": "PLT"
+    },
+    {
+      "name": "Sage Therapeutics",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Health Care",
+      "region": "APAC",
+      "ticker": "SAGE"
+    },
+    {
+      "name": "South American Market Index",
+      "assetClass": "Equity",
+      "type": "index",
+      "industry": "ALL",
+      "region": "SA",
+      "ticker": "SAInd"
+    },
+    {
+      "name": "Singapore Airlines",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Industrial Goods and Services",
+      "region": "APAC",
+      "ticker": "SIAL"
+    },
+    {
+      "name": "Sunrise Telecom Inc",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Telecomunications",
+      "region": "NA",
+      "ticker": "SRTI"
+    },
+    {
+      "name": "Sterling Construction Company",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Construction & Materials",
+      "region": "SA",
+      "ticker": "STRL"
+    },
+    {
+      "name": "Tesco PLC",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Retail",
+      "region": "EU",
+      "ticker": "TESO"
+    },
+    {
+      "name": "Telecom Italia",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Telecomunications",
+      "region": "EU",
+      "ticker": "TLIT"
+    },
+    {
+      "name": "Tetra Pak Ltd",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Industrial Goods and Services",
+      "region": "NA",
+      "ticker": "TTEK"
+    },
+    {
+      "name": "Tui",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Travel & Leisure",
+      "region": "EU",
+      "ticker": "TUI"
+    },
+    {
+      "name": "Towers Watson & Co",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Real Estate",
+      "region": "NA",
+      "ticker": "TW"
+    },
+    {
+      "name": "UBS AG",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Banks",
+      "region": "EU",
+      "ticker": "UBS"
+    },
+    {
+      "name": "Exxon Mobil Corp",
+      "assetClass": "Equity",
+      "type": "stock",
+      "industry": "Oil & Gas",
+      "region": "NA",
+      "ticker": "XOM"
+    }
+  ]
+}

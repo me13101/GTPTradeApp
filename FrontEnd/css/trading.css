@@ -1,0 +1,70 @@
+body {
+  padding-top: 70px;
+}
+
+.glyphicon-arrow-up {
+  color: green;
+}
+.glyphicon-arrow-down {
+  color: red;
+}
+
+.titleAndMoney h5, .titleAndMoney h3 {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.titleAndMoney h3 {
+  font-weight: bold;
+}
+.titleAndMoney small {
+  font-weight: bold;
+}
+.titleAndMoney h3 .up, .titleAndMoney .glyphicon-arrow-up {
+  color: green;
+}
+.titleAndMoney h3 .down, .titleAndMoney .glyphicon-arrow-down {
+  color: red;
+}
+.money {
+  margin-top: 15px;
+}
+
+.chartsRow div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.chartsRow .marketIndices thead{
+  color: white;
+  background-color: #5376C2;
+}
+.chartsRow .portfolioValue {
+  height: 300px;
+  background-color: yellow;
+}
+
+.bs-margin {
+  margin-top : 30px;
+  margin-bottom : 30px;
+}
+
+.bs-btn-margin {
+  margin-top : 10px;
+  margin-bottom : 10px;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+#top-link-block{
+    position: fixed; /* keeps it on the bottom once in view */
+    bottom: 18px; /* height of link element */
+    right: 10px; /* padding from the left side of the window */
+}
+
+/*.ng-dirty.ng-invalid{
+  border-color: #a94442;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  z-index: 1;
+}*/

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <title>GTPTradeApp Sign In</title>
+
+  <!-- For Login Redirection 
+  //<script>
+  //   if (localStorage.getItem("auth") == null ){
+  //     window.location = "./login.html";
+  //   }
+  // </script> -->
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  
+  <script src="js/angular.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="js/highcharts.js"></script>
+  <script src="js/highcharts-more.js"></script>
+  
+</head>
+
+<body role="document">
+	<div ng-app="myApp" ng-controller="UserAccountCtrl">
+		<!-- Fix Navbar Top -->
+    <div ng-include="'navbar.html'"></div>
+
+    <div class="container">
+      <div class="row spacer"></div>
+      <div class="row welcome">
+        <h1 id="welcome">Welcome {{userprofile.user.firstname}}!</h1>
+      </div>
+  <div class="col-md-12">
+    <div class="col-md-2">
+    <span class="glyphicon glyphicon-picture picture"></span><br>
+    <button class="uploadphoto">Upload a Photo</button>
+    </div>
+    <div class="col-md-8 ">
+      <label for="ex1"><h3 style="margin-top: 0px; margin-bottom: 0px;">Personal Information</h3></label>
+      <hr style="margin-top: 0px;">
+    </div>
+    <div class="col-md-2">
+      <label for="ex1">Required *</label>
+    </div>
+    <div class="col-md-5">
+      <label for="ex1">First Name</label>
+      <input class="form-control" id="ex1" type="text">
+    </div>
+    <div class="col-md-5">
+      <label for="ex2">Last Name</label>
+      <input class="form-control" id="ex2" type="text">
+    </div>
+    <div class="col-md-10">
+      <label for="ex3">E-mail</label>
+      <input class="form-control" id="ex3" type="text">
+    </div>
+  </div>
+    <div class="col-md-12" style="padding-top:25px">
+      <label for="ex3"><h3 style="margin-top: 0px; margin-bottom: 0px;">Password</h3></label>
+      <hr style="margin-top: 0px;">
+    </div>
+    <div class="col-md-4">
+      <label for="ex1">Old Password *</label>
+      <input class="form-control" id="ex3" type="text">
+    </div>
+    <div class="col-md-4">
+      <label for="ex1">New Password *</label>
+      <input class="form-control" id="ex1" type="text">
+    </div>
+    <div class="col-md-4">
+      <label for="ex1">Confirm New Password</label>
+      <input class="form-control" id="ex1" type="text">
+    </div>  
+    <div class="row" style="padding-top:25px">  
+      <div class="col-md-2">
+        <button class="deletebutton" style="margin-top:25px;margin-left:25px">Delete this Account</button>
+      </div>
+      <div class="col-md-2 col-md-offset-6">
+        <button class="savebutton" style="margin-top:25px">Save</button>
+      </div>
+      <div class="col-md-2 ">
+        <button class="cancelbutton" style="margin-top:25px">Cancel</button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <script src="js/userAccount.js"></script>
+</body>
+</html>
+
+

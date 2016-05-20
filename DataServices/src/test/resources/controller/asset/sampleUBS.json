@@ -1,0 +1,15 @@
+{
+  "stocklist": [
+    {
+      "name": "UBS AG",
+      "data": {
+        "delta": "-0.118731",
+        "stock_id": "UBS",
+        "datetime": "2015-10-20 15:50:00",
+        "price": 20.73,
+        "pricechange": "1.45"
+      },
+      "type": "stock"
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "stocklist": [
+    {
+      "name": "Sterling Constructn",
+      "data": {
+        "stock_id": "STRL"
+      }
+    },
+    {
+      "name": "Tetra Pak Ltd",
+      "data": {
+        "stock_id": "TTEK"
+      }
+    },
+    {
+      "name": "Parmalat",
+      "data": {
+        "stock_id": "PLT"
+      }
+    },
+    {
+      "name": "Kite Pharma",
+      "data": {
+        "stock_id": "KITE"
+      }
+    },
+    {
+      "name": "Mediaset",
+      "data": {
+        "stock_id": "MS"
+      }
+    },
+    {
+      "name": "Irish Water Ltd",
+      "data": {
+        "stock_id": "IRWT"
+      }
+    },
+    {
+      "name": "Assicurazioni Gen",
+      "data": {
+        "stock_id": "ARZGF"
+      }
+    },
+    {
+      "name": "Aviva",
+      "data": {
+        "stock_id": "AVV"
+      }
+    },
+    {
+      "name": "Eni",
+      "data": {
+        "stock_id": "ENI"
+      }
+    },
+    {
+      "name": "Huntsman Corp",
+      "data": {
+        "stock_id": "HUN"
+      }
+    },
+    {
+      "name": "Singapore Airlines",
+      "data": {
+        "stock_id": "SIAL"
+      }
+    },
+    {
+      "name": "Nestle",
+      "data": {
+        "stock_id": "NESNY"
+      }
+    },
+    {
+      "name": "Sage Therapeutics",
+      "data": {
+        "stock_id": "SAGE"
+      }
+    },
+    {
+      "name": "Allegiant Travel",
+      "data": {
+        "stock_id": "ALGT"
+      }
+    },
+    {
+      "name": "Gamesa Corp Tech",
+      "data": {
+        "stock_id": "GAM"
+      }
+    },
+    {
+      "name": "Allianz",
+      "data": {
+        "stock_id": "ALVG"
+      }
+    },
+    {
+      "name": "Aquila Resources",
+      "data": {
+        "stock_id": "AQAC"
+      }
+    },
+    {
+      "name": "Int Business Mach",
+      "data": {
+        "stock_id": "IBM"
+      }
+    },
+    {
+      "name": "Exxon Mobil Corp",
+      "data": {
+        "stock_id": "XOM"
+      }
+    },
+    {
+      "name": "Johnson & Johnson",
+      "data": {
+        "stock_id": "JNJ"
+      }
+    },
+    {
+      "name": "Tesco PLC",
+      "data": {
+        "stock_id": "TESO"
+      }
+    },
+    {
+      "name": "Tui",
+      "data": {
+        "stock_id": "TUI"
+      }
+    },
+    {
+      "name": "Immobiliere Dass",
+      "data": {
+        "stock_id": "FINA"
+      }
+    },
+    {
+      "name": "Apple Inc",
+      "data": {
+        "stock_id": "AAPL"
+      }
+    },
+    {
+      "name": "Continental",
+      "data": {
+        "stock_id": "CONG"
+      }
+    },
+    {
+      "name": "Procter & Gamble",
+      "data": {
+        "stock_id": "PG"
+      }
+    },
+    {
+      "name": "Luxottica",
+      "data": {
+        "stock_id": "LUX"
+      }
+    },
+    {
+      "name": "Bank Of Amer Corp",
+      "data": {
+        "stock_id": "BAC"
+      }
+    },
+    {
+      "name": "Towers Watson & Co",
+      "data": {
+        "stock_id": "TW"
+      }
+    },
+    {
+      "name": "FIAT Chrysler Auto",
+      "data": {
+        "stock_id": "FCHA"
+      }
+    },
+    {
+      "name": "UBS AG",
+      "data": {
+        "stock_id": "UBS"
+      }
+    },
+    {
+      "name": "Building Cnstrct",
+      "data": {
+        "stock_id": "BCA"
+      }
+    },
+    {
+      "name": "Sunrise Telecom",
+      "data": {
+        "stock_id": "SRTI"
+      }
+    },
+    {
+      "name": "DOW Chemicals Co",
+      "data": {
+        "stock_id": "DOW"
+      }
+    },
+    {
+      "name": "Telecom Italia",
+      "data": {
+        "stock_id": "TLIT"
+      }
+    },
+    {
+      "name": "Facebook Inc",
+      "data": {
+        "stock_id": "FB"
+      }
+    }
+  ]
+}

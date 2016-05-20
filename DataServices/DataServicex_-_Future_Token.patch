@@ -1,0 +1,965 @@
+Index: DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceImpl.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceImpl.java	(revision )
+@@ -1,9 +1,13 @@
+ package com.gtp.tradeapp.service.user;
+ 
++import com.gtp.tradeapp.entity.PasswordResetToken;
+ import com.gtp.tradeapp.entity.Role;
+ import com.gtp.tradeapp.entity.User;
++import com.gtp.tradeapp.entity.VerificationToken;
++import com.gtp.tradeapp.repository.PasswordResetTokenRepository;
+ import com.gtp.tradeapp.repository.RoleRepository;
+ import com.gtp.tradeapp.repository.UserRepository;
++import com.gtp.tradeapp.repository.VerificationTokenRepository;
+ import org.apache.log4j.Logger;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+@@ -11,6 +15,7 @@
+ 
+ import java.util.HashSet;
+ import java.util.Optional;
++import java.util.UUID;
+ 
+ @Service
+ public class UserServiceImpl implements UserService {
+@@ -19,6 +24,12 @@
+     private final RoleRepository roleRepository;
+ 
+     @Autowired
++    private VerificationTokenRepository verificationTokenRepository;
++
++    @Autowired
++    private PasswordResetTokenRepository passwordResetTokenRepository;
++
++    @Autowired
+     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+         this.userRepository = userRepository;
+         this.roleRepository = roleRepository;
+@@ -56,4 +67,52 @@
+         LOGGER.debug("Creating user={}" + newUser.getUserUsername().replaceFirst("@.*", "@***"));
+         return userRepository.save(user);
+     }
++
++    @Override
++    public void updatePassword(User user, String password){
++        user.setPassword(new BCryptPasswordEncoder().encode(password));
++        userRepository.save(user);
++    }
++
++    @Override
++    public User getUser(final String verificationToken) {
++        final User user = verificationTokenRepository.findByToken(verificationToken).getUser();
++        return user;
++    }
++
++    @Override
++    public VerificationToken getVerificationToken(final String VerificationToken) {
++        return verificationTokenRepository.findByToken(VerificationToken);
++    }
++
++    @Override
++    public void createVerificationTokenForUser(final User user, final String token) {
++        final VerificationToken myToken = new VerificationToken(token, user);
++        verificationTokenRepository.save(myToken);
++    }
++
++    @Override
++    public VerificationToken generateNewVerificationToken(final String existingVerificationToken) {
++        VerificationToken vToken = verificationTokenRepository.findByToken(existingVerificationToken);
++        vToken.updateToken(UUID.randomUUID().toString());
++        vToken = verificationTokenRepository.save(vToken);
++        return vToken;
++    }
++
++    @Override
++    public void createPasswordResetTokenForUser(final User user, final String token) {
++        final PasswordResetToken myToken = new PasswordResetToken(token, user);
++        passwordResetTokenRepository.save(myToken);
++    }
++    @Override
++    public PasswordResetToken getPasswordResetToken(final String token) {
++        return passwordResetTokenRepository.findByToken(token);
++    }
++
++    @Override
++    public User getUserByPasswordResetToken(final String token) {
++        return passwordResetTokenRepository.findByToken(token).getUser();
++    }
++
++
+ }
+Index: DataServices/src/main/resources/import.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/resources/import.sql	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/resources/import.sql	(revision )
+@@ -1,12 +1,12 @@
+-insert into user_table(firstname, lastname, username, password) values ('Roy','dream','roy@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe');
+-insert into user_table(firstname, lastname, username, password) values ('Junaid','dream','junaid@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe');
+-insert into user_table(firstname, lastname, username, password) values ('Kingley','dream','kingsley@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe');
+-insert into user_table(firstname, lastname, username, password) values ('Shari','dream','shari@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe');
+-insert into user_table(firstname, lastname, username, password) values ('System.FrontEnd','System','frontend@dummy.com','$2a$10$p6sGYTZ2UeFQmJR2C/R/Tep4cZaetrK8h2mhH8L68.79eaKN6.n8K');
+-insert into user_table(firstname, lastname, username, password) values ('System.BackEnd','System','backend@dummy.com','$2a$10$NVt/qonrYDnZH0pjvng4IeRW9BOxdOBnJB00CKEElI/TtgRw7R9Fm');
+-insert into user_table(firstname, lastname, username, password) values ('System.Analytics','System','analytics@dummy.com','$2a$10$0.c5q/EwoGBeUs8wiC6IwuIjvIzN4TXOtW61hyKPTBbsW2V7cYt1m');
+-insert into user_table(firstname, lastname, username, password) values ('System.DataServices','System','dataservices@dummy.com','$2a$10$j5eJR5Nda5MNMj4cM449Le2HoKiH1b8n3cB6wKg0O6ZimE52xFnAS');
+-insert into user_table(firstname, lastname, username, password) values ('Lucky','Lim','luck.lim.gtp2015@outlook.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe');
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('Roy','dream','roy@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('Junaid','dream','junaid.aleem.gtp2015@outlook.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('Kingley','dream','kingsley@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('Shari','dream','shari@dummy.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('System.FrontEnd','System','frontend@dummy.com','$2a$10$p6sGYTZ2UeFQmJR2C/R/Tep4cZaetrK8h2mhH8L68.79eaKN6.n8K',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('System.BackEnd','System','backend@dummy.com','$2a$10$NVt/qonrYDnZH0pjvng4IeRW9BOxdOBnJB00CKEElI/TtgRw7R9Fm',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('System.Analytics','System','analytics@dummy.com','$2a$10$0.c5q/EwoGBeUs8wiC6IwuIjvIzN4TXOtW61hyKPTBbsW2V7cYt1m',0, 0);
++insert into user_table(firstname, lastname, username, password,enabled, token_expired) values ('System.DataServices','System','dataservices@dummy.com','$2a$10$j5eJR5Nda5MNMj4cM449Le2HoKiH1b8n3cB6wKg0O6ZimE52xFnAS',0, 0);
++insert into user_table(firstname, lastname, username, password, enabled,token_expired) values ('Lucky','Lim','luck.lim.gtp2015@outlook.com','$2a$10$aOfagh5EsYJNnEGcpFfo7u9mxnAUGVhKh2TzAbDbgm.2LALITl6Xe',0, 0);
+ 
+ insert into role(name) values ('ROLE_USER');
+ insert into role(name) values ('ROLE_ADMIN');
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceStub.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceStub.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/java/com/gtp/tradeapp/service/user/UserServiceStub.java	(revision )
+@@ -5,7 +5,7 @@
+ 
+ import java.util.Collections;
+ import java.util.Optional;
+-
++/*
+ public class UserServiceStub implements UserService {
+     @Override
+     public Optional<User> getUserById(long id) {
+@@ -38,3 +38,4 @@
+     }
+ 
+ }
++*/
+\ No newline at end of file
+Index: DataServices/src/main/resources/mail.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- DataServices/src/main/resources/mail.properties	(revision )
++++ DataServices/src/main/resources/mail.properties	(revision )
+@@ -0,0 +1,8 @@
++mail.protocol=smtp
++mail.host=smtp.gmail.com
++mail.port=587
++mail.smtp.auth=true
++mail.smtp.starttls.enable=true
++mail.from=plutos.gtp2015@outlook.com
++mail.username=plutos.gtp2015@gmail.com
++mail.password=TigerTeam
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/repository/VerificationTokenRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/repository/VerificationTokenRepository.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/repository/VerificationTokenRepository.java	(revision )
+@@ -0,0 +1,16 @@
++package com.gtp.tradeapp.repository;
++
++import com.gtp.tradeapp.entity.User;
++import com.gtp.tradeapp.entity.VerificationToken;
++import org.springframework.data.repository.CrudRepository;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++public interface VerificationTokenRepository extends CrudRepository<VerificationToken, Long> {
++
++    VerificationToken findByToken(String token);
++
++    VerificationToken findByUser(User user);
++
++}
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/rest/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/rest/UserController.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/java/com/gtp/tradeapp/rest/UserController.java	(revision )
+@@ -18,16 +18,23 @@
+ 
+ import com.fasterxml.jackson.core.JsonProcessingException;
+ import com.gtp.tradeapp.domain.Status;
++import com.gtp.tradeapp.entity.PasswordResetToken;
+ import com.gtp.tradeapp.entity.User;
+ import com.gtp.tradeapp.service.user.UserService;
+ import org.apache.log4j.Logger;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.PathVariable;
+-import org.springframework.web.bind.annotation.RequestBody;
+-import org.springframework.web.bind.annotation.RequestMapping;
+-import org.springframework.web.bind.annotation.RequestMethod;
+-import org.springframework.web.bind.annotation.RestController;
++import org.springframework.context.MessageSource;
++import org.springframework.mail.MailSender;
++import org.springframework.mail.SimpleMailMessage;
++import org.springframework.mail.javamail.JavaMailSender;
++import org.springframework.mail.javamail.JavaMailSenderImpl;
++import org.springframework.security.core.SpringSecurityMessageSource;
++import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
++import org.springframework.web.bind.annotation.*;
+ 
++import javax.servlet.http.HttpServletRequest;
++import java.util.*;
++
+ @RestController
+ @RequestMapping("/users")
+ public class UserController {
+@@ -36,9 +43,14 @@
+ 
+     private final UserService userService;
+ 
++    private JavaMailSender mailSender;
++    private MessageSource messages;
++
+     @Autowired
+-    public UserController(UserService userService) {
++    public UserController(UserService userService, JavaMailSender mailSender) {
+         this.userService = userService;
++        this.mailSender = mailSender;
++        this.messages = new SpringSecurityMessageSource();
+     }
+ 
+     @RequestMapping("/list")
+@@ -63,9 +75,117 @@
+     }
+ 
+     // TODO:: Should be secured
+-    @RequestMapping("/user/{id}")
++    @RequestMapping("/user/id/{id}")
+     public User getUserPage(@PathVariable Long id) {
+         LOGGER.debug("Getting user for user={}" + id);
+         return userService.getUserById(id).get();
+     }
++
++    @RequestMapping(value = "/user/password/reset", method = RequestMethod.POST)
++    public Status resetPassword(@RequestParam("email") String userEmail){
++        User user = userService.getUserByEmail(userEmail).get();
++        if(user == null){
++            return new Status(0, "User doesn't exist");
++        }
++        String password = generateRandomPassoword();
++        userService.updatePassword(user, password);
++
++        SimpleMailMessage email =
++                constructResetTokenEmail(password, user);
++        mailSender.send(email);
++
++        return new Status(1, "Email Sent");
++    }
++
++    private SimpleMailMessage constructResetTokenEmail(String password, User user) {
++
++        //String message = messages.getMessage("Hello WOrld", null, locale);
++        String message = "Your new password is: ";
++        SimpleMailMessage email = new SimpleMailMessage();
++        email.setTo(user.getUserUsername());
++        //email.setTo("mj.aleem@gmail.com");
++        email.setSubject("Reset Password");
++        email.setText(message + " " + password);
++        email.setFrom("plutos.gtp2015@gmail.com");
++        return email;
++    }
++
++    private String generateRandomPassoword(){
++        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
++        StringBuilder sb = new StringBuilder();
++        Random random = new Random();
++        for (int i = 0; i < 20; i++) {
++            char c = chars[random.nextInt(chars.length)];
++            sb.append(c);
++        }
++        String output = sb.toString();
++        return output;
++    }
++
++    /****I think we might need this later
++     @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
++     public Status resetPassword(
++     HttpServletRequest request, @RequestParam("email") String userEmail) {
++     LOGGER.debug("Getting email for user = " + userEmail);
++     User user = userService.getUserByEmail(userEmail).get();
++     if (user == null) {
++     throw new InputMismatchException();
++     }
++
++     String token = UUID.randomUUID().toString();
++     userService.createPasswordResetTokenForUser(user, token);
++     String appUrl =
++     "http://" + request.getServerName() +
++     ":" + request.getServerPort() +
++     request.getContextPath();
++
++     LOGGER.debug("appUrl: " + appUrl);
++     SimpleMailMessage email =
++     constructResetTokenEmail(appUrl, request.getLocale(), token, user);
++     mailSender.send(email);
++
++     // return new Status(0,
++     //    messages.getMessage(userEmail, null, request.getLocale()));
++
++     return new Status(0, "Email Sent");
++     }
++
++     @RequestMapping(value = "/user/changePassword", method = RequestMethod.GET)
++     public String showChangePasswordPage(
++     Locale locale, Model model, @RequestParam("id") long id, @RequestParam("token") String token) {
++
++     PasswordResetToken passToken = userService.getPasswordResetToken(token);
++     User user = passToken.getUser();
++     if (passToken == null || user.getId() != id) {
++     String message = messages.getMessage("auth.message.invalidToken", null, locale);
++     model.addAttribute("message", message);
++     return "redirect:/login.html?lang=" + locale.getLanguage();
++     }
++
++     Calendar cal = Calendar.getInstance();
++     if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
++     model.addAttribute("message", messages.getMessage("auth.message.expired", null, locale));
++     return "redirect:/login.html?lang=" + locale.getLanguage();
++     }
++
++     Authentication auth = new UsernamePasswordAuthenticationToken(
++     user, null, userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
++     SecurityContextHolder.getContext().setAuthentication(auth);
++
++     return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
++     }
++
++     private SimpleMailMessage constructResetTokenEmail(
++     String contextPath, Locale locale, String token, User user) {
++     String url = contextPath + "/user/changePassword?id=" + user.getId() + "&token=" + token;
++     //String message = messages.getMessage("Hello WOrld", null, locale);
++     String message = "Hello World";
++     SimpleMailMessage email = new SimpleMailMessage();
++     //email.setTo(user.getUserUsername());
++     email.setTo("mj.aleem@gmail.com");
++     email.setSubject("Reset Password");
++     email.setText(message + " " + url);
++     email.setFrom("plutos.gtp2015@gmail.com");
++     return email;
++     }*/
+ }
+Index: DataServices/src/main/java/com/gtp/tradeapp/entity/PasswordResetToken.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/entity/PasswordResetToken.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/entity/PasswordResetToken.java	(revision )
+@@ -0,0 +1,147 @@
++package com.gtp.tradeapp.entity;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++
++import java.util.Calendar;
++import java.util.Date;
++
++import javax.persistence.Entity;
++import javax.persistence.FetchType;
++import javax.persistence.GeneratedValue;
++import javax.persistence.GenerationType;
++import javax.persistence.Id;
++import javax.persistence.JoinColumn;
++import javax.persistence.OneToOne;
++
++@Entity
++public class PasswordResetToken {
++
++    private static final int EXPIRATION = 60 * 24;
++
++    @Id
++    @GeneratedValue(strategy = GenerationType.AUTO)
++    private Long id;
++
++    private String token;
++
++    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
++    @JoinColumn(nullable = false, name = "user_id")
++    private User user;
++
++    private Date expiryDate;
++
++    public PasswordResetToken() {
++        super();
++    }
++
++    public PasswordResetToken(final String token) {
++        super();
++
++        this.token = token;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    public PasswordResetToken(final String token, final User user) {
++        super();
++
++        this.token = token;
++        this.user = user;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    //
++
++    public String getToken() {
++        return token;
++    }
++
++    public void setToken(final String token) {
++        this.token = token;
++    }
++
++    public User getUser() {
++        return user;
++    }
++
++    public void setUser(final User user) {
++        this.user = user;
++    }
++
++    public Date getExpiryDate() {
++        return expiryDate;
++    }
++
++    public void setExpiryDate(final Date expiryDate) {
++        this.expiryDate = expiryDate;
++    }
++
++    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
++        final Calendar cal = Calendar.getInstance();
++        cal.setTimeInMillis(new Date().getTime());
++        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
++        return new Date(cal.getTime().getTime());
++    }
++
++    public void updateToken(final String token) {
++        this.token = token;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    //
++
++    @Override
++    public int hashCode() {
++        final int prime = 31;
++        int result = 1;
++        result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
++        result = prime * result + ((token == null) ? 0 : token.hashCode());
++        result = prime * result + ((user == null) ? 0 : user.hashCode());
++        return result;
++    }
++
++    @Override
++    public boolean equals(final Object obj) {
++        if (this == obj) {
++            return true;
++        }
++        if (obj == null) {
++            return false;
++        }
++        if (getClass() != obj.getClass()) {
++            return false;
++        }
++        final PasswordResetToken other = (PasswordResetToken) obj;
++        if (expiryDate == null) {
++            if (other.expiryDate != null) {
++                return false;
++            }
++        } else if (!expiryDate.equals(other.expiryDate)) {
++            return false;
++        }
++        if (token == null) {
++            if (other.token != null) {
++                return false;
++            }
++        } else if (!token.equals(other.token)) {
++            return false;
++        }
++        if (user == null) {
++            if (other.user != null) {
++                return false;
++            }
++        } else if (!user.equals(other.user)) {
++            return false;
++        }
++        return true;
++    }
++
++    @Override
++    public String toString() {
++        final StringBuilder builder = new StringBuilder();
++        builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");
++        return builder.toString();
++    }
++
++}
+Index: DataServices/src/main/java/com/gtp/tradeapp/rest/GenericResponse.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/rest/GenericResponse.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/rest/GenericResponse.java	(revision )
+@@ -0,0 +1,20 @@
++package com.gtp.tradeapp.rest;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++public class GenericResponse {
++    private String message;
++    private String error;
++
++    public GenericResponse(String message) {
++        super();
++        this.message = message;
++    }
++
++    public GenericResponse(String message, String error) {
++        super();
++        this.message = message;
++        this.error = error;
++    }
++}
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/repository/PasswordResetTokenRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/repository/PasswordResetTokenRepository.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/repository/PasswordResetTokenRepository.java	(revision )
+@@ -0,0 +1,16 @@
++package com.gtp.tradeapp.repository;
++
++import com.gtp.tradeapp.entity.PasswordResetToken;
++import com.gtp.tradeapp.entity.User;
++import org.springframework.data.repository.CrudRepository;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++public interface PasswordResetTokenRepository extends CrudRepository<PasswordResetToken, Long> {
++
++    PasswordResetToken findByToken(String token);
++
++    PasswordResetToken findByUser(User user);
++
++}
+\ No newline at end of file
+Index: DataServices/src/test/java/com/gtp/tradeapp/rest/UserControllerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/test/java/com/gtp/tradeapp/rest/UserControllerTest.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/test/java/com/gtp/tradeapp/rest/UserControllerTest.java	(revision )
+@@ -84,4 +84,9 @@
+                 .andExpect(content().string("{\"code\":1,\"message\":\"User added Successfully!\"}"));
+     }
+ 
++
++
++
++
++
+ }
+Index: DataServices/src/main/java/com/gtp/tradeapp/configuration/MailConfiguration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/configuration/MailConfiguration.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/configuration/MailConfiguration.java	(revision )
+@@ -0,0 +1,51 @@
++package com.gtp.tradeapp.configuration;
++
++import org.springframework.beans.factory.annotation.Value;
++import org.springframework.context.annotation.Bean;
++import org.springframework.context.annotation.Configuration;
++import org.springframework.context.annotation.PropertySource;
++import org.springframework.mail.javamail.JavaMailSender;
++import org.springframework.mail.javamail.JavaMailSenderImpl;
++
++import java.util.Properties;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++
++@Configuration
++@PropertySource("classpath:mail.properties")
++public class MailConfiguration {
++    @Value("${mail.protocol}")
++    private String protocol;
++    @Value("${mail.host}")
++    private String host;
++    @Value("${mail.port}")
++    private int port;
++    @Value("${mail.smtp.auth}")
++    private boolean auth;
++    @Value("${mail.smtp.starttls.enable}")
++    private boolean starttls;
++    @Value("${mail.from}")
++    private String from;
++    @Value("${mail.username}")
++    private String username;
++    @Value("${mail.password}")
++    private String password;
++
++    @Bean
++    public JavaMailSender javaMailSender() {
++        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
++        Properties mailProperties = new Properties();
++        mailProperties.put("mail.smtp.auth", auth);
++        mailProperties.put("mail.smtp.starttls.enable", starttls);
++        mailSender.setJavaMailProperties(mailProperties);
++        mailSender.setHost(host);
++        mailSender.setPort(port);
++        mailSender.setProtocol(protocol);
++        mailSender.setUsername(username);
++        mailSender.setPassword(password);
++        return mailSender;
++    }
++
++}
+Index: DataServices/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/pom.xml	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/pom.xml	(revision )
+@@ -109,6 +109,17 @@
+             <scope>test</scope>
+         </dependency>
+ 
++        <!-- Context - Messaging -->
++        <dependency>
++            <groupId>org.springframework</groupId>
++            <artifactId>spring-context-support</artifactId>
++        </dependency>
++        <dependency>
++            <groupId>javax.mail</groupId>
++            <artifactId>mail</artifactId>
++            <version>1.4.5</version>
++        </dependency>
++
+         <dependency>
+             <groupId>com.jayway.jsonpath</groupId>
+             <artifactId>json-path</artifactId>
+\ No newline at end of file
+Index: DataServices/src/main/resources/log4j.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- DataServices/src/main/resources/log4j.properties	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/resources/log4j.properties	(revision )
+@@ -1,4 +1,4 @@
+-log4j.rootCategory=DEBUG, CONSOLE, FILE
++log4j.rootCategory=INFO, CONSOLE, FILE
+ 
+ PID=????
+ LOG_PATTERN=[%d{yyyy-MM-dd HH:mm:ss.SSS}] %X{context} - ${PID} %5p [%t] --- %c{1}: %m%n
+Index: DataServices/readme.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/readme.md	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/readme.md	(revision )
+@@ -27,7 +27,7 @@
+ 	* /users/user/id/{id} (TBD)
+ 	* /users/user/delete (TBD)
+ 	* /users/user/edit (TBD)
+-	* /users/user/password/reset (TBD)
++	* /users/user/password/reset
+ 3. Portfolio
+ 	* /portfolio/amount (Deprecated)
+ 	* /portfolio/details (TBC)
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/entity/User.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/java/com/gtp/tradeapp/entity/User.java	(revision )
+@@ -57,6 +57,11 @@
+     @NotEmpty
+     private String password;
+ 
++
++    private boolean enabled;
++
++    private boolean tokenExpired;
++
+     @JsonIgnore
+     @ManyToMany(fetch = FetchType.EAGER)
+     @JoinTable(name = "user_role",
+@@ -79,6 +84,8 @@
+         this.username = user.getUserUsername();
+         this.password = user.getPassword();
+         this.roles = user.getRoles();
++        this.enabled = false;
++        this.tokenExpired = false;
+     }
+ 
+     public Integer getId() {
+@@ -129,6 +136,22 @@
+ 
+     public void setRoles(Set<Role> roles) {
+         this.roles = roles;
++    }
++
++    public boolean isEnabled() {
++        return enabled;
++    }
++
++    public void setEnabled(final boolean enabled) {
++        this.enabled = enabled;
++    }
++
++    public boolean isTokenExpired() {
++        return tokenExpired;
++    }
++
++    public void setTokenExpired(final boolean expired) {
++        this.tokenExpired = expired;
+     }
+ 
+     @JsonIgnore
+Index: DataServices/src/main/java/com/gtp/tradeapp/entity/VerificationToken.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/entity/VerificationToken.java	(revision )
++++ DataServices/src/main/java/com/gtp/tradeapp/entity/VerificationToken.java	(revision )
+@@ -0,0 +1,137 @@
++package com.gtp.tradeapp.entity;
++
++import javax.persistence.*;
++import java.util.Calendar;
++import java.util.Date;
++
++/**
++ * Created by jaleem on 15/10/2015.
++ */
++@Entity
++public class VerificationToken {
++
++    private static final int EXPIRATION = 60 * 24;
++
++    @Id
++    @GeneratedValue(strategy = GenerationType.AUTO)
++    private Long id;
++
++    private String token;
++
++    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
++    @JoinColumn(nullable = false, name = "user_id")
++    private User user;
++
++    private Date expiryDate;
++
++    public VerificationToken() {
++        super();
++    }
++
++    public VerificationToken(final String token) {
++        super();
++
++        this.token = token;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    public VerificationToken(final String token, final User user) {
++        super();
++
++        this.token = token;
++        this.user = user;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    public String getToken() {
++        return token;
++    }
++
++    public void setToken(final String token) {
++        this.token = token;
++    }
++
++    public User getUser() {
++        return user;
++    }
++
++    public void setUser(final User user) {
++        this.user = user;
++    }
++
++    public Date getExpiryDate() {
++        return expiryDate;
++    }
++
++    public void setExpiryDate(final Date expiryDate) {
++        this.expiryDate = expiryDate;
++    }
++
++    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
++        final Calendar cal = Calendar.getInstance();
++        cal.setTimeInMillis(new Date().getTime());
++        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
++        return new Date(cal.getTime().getTime());
++    }
++
++    public void updateToken(final String token) {
++        this.token = token;
++        this.expiryDate = calculateExpiryDate(EXPIRATION);
++    }
++
++    //
++
++    @Override
++    public int hashCode() {
++        final int prime = 31;
++        int result = 1;
++        result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
++        result = prime * result + ((token == null) ? 0 : token.hashCode());
++        result = prime * result + ((user == null) ? 0 : user.hashCode());
++        return result;
++    }
++
++    @Override
++    public boolean equals(final Object obj) {
++        if (this == obj) {
++            return true;
++        }
++        if (obj == null) {
++            return false;
++        }
++        if (getClass() != obj.getClass()) {
++            return false;
++        }
++        final VerificationToken other = (VerificationToken) obj;
++        if (expiryDate == null) {
++            if (other.expiryDate != null) {
++                return false;
++            }
++        } else if (!expiryDate.equals(other.expiryDate)) {
++            return false;
++        }
++        if (token == null) {
++            if (other.token != null) {
++                return false;
++            }
++        } else if (!token.equals(other.token)) {
++            return false;
++        }
++        if (user == null) {
++            if (other.user != null) {
++                return false;
++            }
++        } else if (!user.equals(other.user)) {
++            return false;
++        }
++        return true;
++    }
++
++    @Override
++    public String toString() {
++        final StringBuilder builder = new StringBuilder();
++        builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");
++        return builder.toString();
++    }
++
++}
+\ No newline at end of file
+Index: DataServices/src/main/java/com/gtp/tradeapp/service/user/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DataServices/src/main/java/com/gtp/tradeapp/service/user/UserService.java	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/java/com/gtp/tradeapp/service/user/UserService.java	(revision )
+@@ -1,6 +1,8 @@
+ package com.gtp.tradeapp.service.user;
+ 
++import com.gtp.tradeapp.entity.PasswordResetToken;
+ import com.gtp.tradeapp.entity.User;
++import com.gtp.tradeapp.entity.VerificationToken;
+ 
+ import java.util.Optional;
+ 
+@@ -13,5 +15,24 @@
+     Iterable<User> getAllUsers();
+ 
+     User create(User user);
++
++    User getUser(final String verificationToken);
++
++
++    VerificationToken getVerificationToken(final String VerificationToken);
++
++    void updatePassword(User user, String password);
++
++
++    void createVerificationTokenForUser(final User user, final String token);
++
++    VerificationToken generateNewVerificationToken(final String existingVerificationToken);
++
++    void createPasswordResetTokenForUser(final User user, final String token);
++
++
++    PasswordResetToken getPasswordResetToken(final String token);
++
++    User getUserByPasswordResetToken(final String token);
+ 
+ }
+Index: DataServices/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- DataServices/src/main/resources/application.properties	(revision 83b5160d3af4f05a8cdce1c4df0696796430d151)
++++ DataServices/src/main/resources/application.properties	(revision )
+@@ -26,7 +26,7 @@
+ # ===============================
+ # = DATA SOURCE
+ # ===============================
+-spring.datasource.url=jdbc:sqlserver://thunserv:1433;databaseName=GTPTradeApp-TEST
++spring.datasource.url=jdbc:sqlserver://thunserv:1433;databaseName=GTPTradeApp-TEST-JUNAID
+ spring.datasource.username=sa
+ spring.datasource.password=Password1
+ spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+@@ -44,7 +44,7 @@
+ # Hibernate ddl auto (create, create-drop, update): with "update" the database
+ # schema will be automatically updated accordingly to java entities found in
+ # the project
+-spring.jpa.hibernate.ddl-auto = none
++spring.jpa.hibernate.ddl-auto = create
+ 
+ # Naming strategy
+ spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
+\ No newline at end of file

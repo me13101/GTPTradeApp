@@ -1,0 +1,10 @@
+[
+{"name":"S&P 500 Futures", "price":"2,002.25", "change":"-8.50"},
+{"name":"Nasdaq Futurees", "price":"4,351.50", "change":"-22.88"},
+{"name":"Dow 30","price": "17,131.86", "change":"+47.37"},
+{"name":"S&P 500 VIX","price": "16.17", "change":"-.91"},
+{"name":"DAX","price": "10,022.00", "change":"-100.83"},
+{"name":"Nikkei 225","price": "18,234.74", "change":"-203.93"},
+{"name":"US Dollar Index","price": "94.81", "change":"-.08"},
+{"name":"Euro Index","price": "90.51", "change":"+.21"}
+]

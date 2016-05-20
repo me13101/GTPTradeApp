@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GTPTradeApp Sign In</title>
+  
+  <!-- For Login Redirection -->
+  <script>
+    if (localStorage.getItem("auth") != null ){
+      window.location = "./dashboard.html";
+    }
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/signin.css" rel="stylesheet">
+  
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+
+<body>
+  <div ng-app="myApp" ng-controller="AccountCtrl" ng-init="status=[1, 0, 0, 0]">
+    
+    <!-- The log in section -->
+    <div class="container" ng-show="status[0]">
+      <form name="LoginForm" class="form-signin" novalidate>
+        <h2 class="form-signin-heading text-center">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" ng-model="email" required gtpemail autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" ng-model="password" required>
+        <p ng-show="LoginForm.inputEmail.$error.gtpemail" class="help-block">Wrong Email address format.</p>
+
+		    <div><br/></div>
+        <a ng-click="status=[0,0,1,0];"> Forgot password?</a> 
+        <br/>
+        <a ng-click="status=[0,1,0,0];"> New User?</a> 
+        <div><br/></div>
+          <button class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled="LoginForm.$invalid">Submit</button>       
+      </form>   
+    </div> <!-- /End of log in section -->
+
+    <!-- The sign up section -->
+    <div class="container form-signin" ng-show="status[1]"> 
+      <div class="row">
+        <form name="RegForm" ng-submit="signup(RegForm.$valid)">
+          <h2 class="form-signin-heading text-center">Register</h2>
+
+          <input type="text" name="RegFirstName" id="RegFirstName" class="form-control" placeholder="First Name" ng-model="newuser.firstname" required autofocus >
+          <input type="text" name="RegLastName" id="RegLastName" class="form-control" placeholder="Last Name" ng-model="newuser.lastname" required>
+          <input type="email" name="RegEmail" id="RegEmail" class="form-control" placeholder="Email" ng-model="newuser.username" required gtpemail>
+          <input type="password" name="RegPassword" id="RegPassword" class="form-control" placeholder="Password" ng-model="newuser.password" ng-minlength="8" orig-password="RegConfirmPassword" required>
+          <input type="password" name="RegConfirmPassword" id="RegConfirmPassword" class="form-control" placeholder="Confirm Password" ng-model="newuser.confirmPassword" confirm-password="RegPassword"required>
+
+          <p ng-show="RegForm.$error.required" class="help-block">Make sure to fill all the fields.</p>
+          <p ng-show="RegForm.RegEmail.$error.gtpemail" class="help-block">Wrong Email address format.</p>
+          <p ng-show="RegForm.RegPassword.$error.minlength" class="help-block">Password should be longer than 7 characters.</p>
+          <p ng-show="RegForm.RegConfirmPassword.$error.confirmPassword" class="help-block">The two passwords should be the same.</p>
+ 
+          <button type="submit" class="btn btn-lg btn-primary btn-block btn-margin" ng-disabled="RegForm.$invalid">Register</button>
+        </form> 
+          <button class="btn btn-lg btn-block btn-margin" ng-click="goHome()">Already a user? Sign in</button> 
+      </div>
+    </div><!-- /End of sign up section -->
+
+    <!-- Password Recovery Page -->
+    <div class="container form-signin" ng-show="status[2]"> 
+      <div class="row">
+        <form name="RecoverForm" ng-submit="passwordrecovery()">
+          <h2 class="form-passwordrecovery-heading text-center">Enter your email</h2>
+          <input type="email" name="RecoverEmail" id="RecoverEmail" class="form-control" placeholder="Email" ng-model="recoveremail" required gtpemail>
+          <p ng-show="RecoverForm.RecoverEmail.$error.gtpemail" class="help-block">Wrong Email address format.</p>
+          <div><br/></div>
+
+          <button class="btn btn-lg btn-primary btn-block" ng-click="forgetPassword()" type="button" id="loading-btn" ng-disabled="RecoverForm.$invalid">Recover Password</button><br>
+          <button class="btn btn-lg btn-block btn-margin" ng-click="goHome()">Go Back</button>     
+        </form> 
+      </div>
+    </div><!-- /End of Password Recovery Page -->
+
+    <!-- Confirmation Page for Password-->
+    <div class="container form-signin" ng-show="status[3]"> 
+      <div class="alert alert-info">
+        <div class="row text-center">
+          A message will be sent to the email address provided.
+        </div>
+      </div>
+      <button class="btn btn-lg btn-block btn-margin" ng-click="goHome()">Return to Sign in</button>
+    </div>
+
+    <!-- /End of Confirmation Page for Password Recovery -->
+
+    </div>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/account.js"></script>
+    <script>
+      $("#loading-btn").click(function() {
+      var $btn = $(this);
+      $btn.button('loading');
+
+      setTimeout(function () {
+        $btn.button('reset');
+    }, 10000);
+});
+    </script>
+
+  </div>
+</body>
+</html>

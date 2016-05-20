@@ -1,0 +1,128 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> ###UPDATE EVERY 5 MINUTES###
+> 
+> library('RODBC')
+> library('TTR')
+> source("C:/Python/19OctSimulator/TechAnalysisFinal.R")
+> #source("W:/19OctSimulator/TechAnalysisFinal.R")
+> 
+> #UPDATE CURRENT PRICE TABLE FROM FORECASTED PRICE
+> today=format(Sys.time(), "%Y-%m-%d %X");
+> con <- odbcConnect("AnalyticConn", uid = "prodService", pwd = "gtpprod#1234")
+> index <- sqlQuery(con, sprintf("SELECT [index] FROM [index_value]"))
+Warning message:
+closing unused RODBC handle 1 
+> 
+> #Delta Calculation
+> old_price <- sqlQuery(con, sprintf("SELECT [price],[stock_id] FROM [current_price_data]"))
+> new_price <- sqlQuery(con, sprintf("SELECT [%d],[stock_id] FROM [stock_forecast]", index[1,1]))
+> prices <- merge(old_price, new_price)
+> print(prices)
+   stock_id   price      53
+1     AAPL   149.97  148.31
+2     ALGT    28.50   29.68
+3     ALVG   155.44  155.56
+4     APInd   77.85   78.05
+5     AQAC    51.55   50.58
+6     ARZGF    2.97    3.45
+7     AVV     43.67   42.63
+8     BAC      4.73    5.13
+9     BCA     79.66   82.10
+10    CONG   263.11  265.32
+11    DOW     84.99   85.59
+12    ENI     26.36   26.08
+13    EUInd  145.99  147.03
+14    FB     224.36  216.81
+15    FCHA    34.80   33.64
+16    FINA    41.28   38.16
+17    GAM      2.31    3.54
+18    HUN     21.19   22.01
+19    IBM   1133.54 1126.72
+20    IRWT    80.05   79.94
+21    JNJ    212.64  206.39
+22    KITE   113.33  114.64
+23    LUX     83.08   85.24
+24    MAInd  449.32  444.65
+25    MS       3.16    2.45
+26    NAInd  599.89  595.83
+27    NESNY    9.90   12.74
+28    PG     175.50  173.11
+29    PLT     20.79   23.79
+30    SAGE    88.17   87.67
+31    SAInd   60.30   61.64
+32    SIAL     7.04   11.93
+33    SRTI    44.07   45.25
+34    STRL    11.99   12.14
+35    TESO     8.88    8.08
+36    TLIT    22.34   22.71
+37    TTEK    71.19   74.46
+38    TUI     10.08   10.14
+39    TW     247.85  243.11
+40    UBS     20.59   19.81
+41    XOM    159.51  156.89
+> delta <- vector(mode="numeric", length=41)
+> change <- vector(mode = "numeric", length=41)
+> for(i in 1:41){
++   delta[i] = (prices[i,3] - prices[i,2])/prices[i,2]
++   change[i] = (prices[i,3] - prices[i,2])
++ }
+> for(i in 1:41){
++   sqlQuery(con, sprintf("UPDATE current_price_data SET delta=%f, price_change=%f WHERE stock_id='%s'", delta[i], change[i], prices[i,1]))
++ }
+> ###
+> 
+> 
+> sqlQuery(con, sprintf("UPDATE current_price_data SET current_price_data.price = stock_forecast.[%d] FROM current_price_data  INNER JOIN  stock_forecast on current_price_data.stock_id = stock_forecast.stock_id;", index[1,1]))
+character(0)
+> sqlQuery(con, sprintf("UPDATE current_price_data SET datetime='%s'", today))
+character(0)
+> 
+> 
+> 
+> if (index == 72){
++   index <- sqlQuery(con, sprintf("UPDATE [index_value] SET [index] = %d", 1))
++ }else{
++   index <- sqlQuery(con, sprintf("UPDATE [index_value] SET [index] = %d", index[1,1] + 1))
++ }
+> 
+> #UPDATE DAILY PRICE TABLE FROM CURRENT PRICE
+> sqlQuery(con, sprintf("INSERT INTO [MarketData].[dbo].[daily_price_data] SELECT [stock_id],[price],[datetime],[region],[industry],[stock_name],[stock_trade_flag] FROM [MarketData].[dbo].[current_price_data]"))
+character(0)
+> 
+> 
+> #####TECH ANALYSIS##
+> uploadDailyMetrics(con, '[MarketData].[dbo].[daily_price_data]', today, '[MarketData].[dbo].[technical_daily_table]')
+> #sqlQuery(con, "DELETE FROM [MarketData].[dbo].[technical_daily_table] WHERE datetime in (SELECT TOP 41 [datetime] FROM [MarketData].[dbo].[daily_price_data] ORDER BY datetime ASC)")
+> 
+> 
+> ######DELETE OLDEST 41 ROWS
+> sqlQuery(con, "DELETE FROM [MarketData].[dbo].[daily_price_data] WHERE datetime in (SELECT TOP 41 [datetime] FROM [MarketData].[dbo].[daily_price_data] ORDER BY datetime ASC)")
+character(0)
+> 
+> ####IMPORTANT: uncomment the above line when having enough data!!! =3=
+> 
+> proc.time()
+   user  system elapsed 
+   2.82    0.10    5.12 
+Warning message:
+closing unused RODBC handle 2 

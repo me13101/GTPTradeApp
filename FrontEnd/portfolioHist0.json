@@ -1,0 +1,38 @@
+[
+    {
+      "datetime": "2015-10-14 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    },
+    {
+      "datetime": "2015-10-15 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    },
+    {
+      "datetime": "2015-10-16 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    },
+    {
+      "datetime": "2015-10-17 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    },
+    {
+      "datetime": "2015-10-18 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    },
+    {
+      "datetime": "2015-10-18 12:10:00",
+      "cash": 96.4,
+      "portfolio": 100,
+      "netassetvalue": 196.4
+    }
+]

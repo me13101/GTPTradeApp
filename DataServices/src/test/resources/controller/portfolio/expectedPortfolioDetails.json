@@ -1,0 +1,54 @@
+{
+  "summary": {
+    "netAssetValue": 1015229.00,
+    "totalPortfolio": 15229.00,
+    "delta": 0.02,
+    "cash": 1000000.00
+  },
+  "portfolio": [
+    {
+      "userId": 4,
+      "stockId": "TUI",
+      "quantity": 50,
+      "currentPrice": 39.58,
+      "asset": {
+        "name": "Tui",
+        "assetClass": "Equity",
+        "type": "stock",
+        "industry": "Travel & Leisure",
+        "region": "EU",
+        "ticker": "TUI"
+      },
+      "totalAmount": 1979.00
+    },
+    {
+      "userId": 4,
+      "stockId": "UBS",
+      "quantity": 1000,
+      "currentPrice": 13.25,
+      "asset": {
+        "name": "UBS AG",
+        "assetClass": "Equity",
+        "type": "stock",
+        "industry": "Banks",
+        "region": "EU",
+        "ticker": "UBS"
+      },
+      "totalAmount": 13250.00
+    }
+  ],
+  "assetTypeDistribution": {
+    "stock": 1.0,
+    "index": 0.0
+  },
+  "assetClassDistribution": {
+    "Equity": 1.0,
+    "FixedIncome": 0.0,
+    "Commodities": 0.0
+  },
+  "user": {
+    "firstname": "Shari",
+    "username": "shari@dummy.com",
+    "lastname": "dream"
+  }
+}

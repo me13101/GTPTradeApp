@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>GTPTradeApp Sign In</title>
+
+<!-- For Login Redirection -->
+<script>
+    if (localStorage.getItem("auth") == null ){
+      window.location = "./login.html";
+    }
+  </script>
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="js/angular.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<!--<script src="js/highcharts.js"></script>
+  <script src="js/highcharts-more.js"></script> -->
+<script src="js/highstock.js"></script>
+
+</head>
+
+<body role="document">
+	<div ng-app="myApp" ng-controller="DashboardCtrl">
+		<!-- Fix Navbar Top -->
+		<div ng-include="'navbar.html'"></div>
+
+		<div class="container">
+			<div class="row col-md-12 spacer"></div>
+			<div class="row col-md-12 welcome">
+				<h1 id="welcome">Welcome {{userprofile.user.firstname}}!</h1>
+			</div>
+			<!-- 			<marquee scrollamount="10" scrolldelay="0"> -->
+			<!-- 				<table> -->
+			<!-- 					<tr> -->
+			<!-- 						<td ng-repeat="x in marketData" -->
+			<!-- 							ng-class="{down: x.data.delta < 0, up: x.data.delta >= 0}">{{x.data.stock_id}}: -->
+			<!-- 							{{x.data.price}} -->
+			<!-- 							<span -->
+			<!-- 								ng-show="x.data.delta >= 0" -->
+			<!-- 								class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> -->
+			<!-- 							<span ng-show="x.data.delta < 0" -->
+			<!-- 								class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> -->
+			<!-- 								&nbsp;||&nbsp; -->
+			<!-- 						</td> -->
+			<!-- 					</tr> -->
+			<!-- 				</table> -->
+			<!-- 			</marquee> -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Market Indices Chart-->
+					<div id="markPanel" class="col-md-4 marketIndices" onclick="#">
+						<h3 class="page-header">Market Indices</h3>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td>Index</td>
+									<td>Value</td>
+									<td>Change (%)</td>
+								</tr>
+							</thead>
+
+							<tbody>
+								<!-- 							<tr ng-repeat="name in indiceData"> -->
+								<!-- 								<td>{{name}}</td> -->
+								<!-- 								<td>{{data.pricelist[0].price}}</td> -->
+								<!-- 							</tr> -->
+								<tr ng-repeat="x in indexData">
+									<td>{{x.name}}</td>
+									<td>{{x.data.price}}</td>
+									<td ng-class="{down: !x.data.up, up: x.data.up}">
+										{{x.data.delta}} <span ng-show="x.data.up"
+										class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+										<span ng-show="!x.data.up"
+										class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Portfolio chart -->
+					<div id="portPanel" class="col-md-7">
+						<div class="row">
+							<div id="portDetails" class="col-md-12">
+								<h3 class="page-header">Portfolio</h3>
+								<!-- Portfolio statistics * 3 -->
+								<div class="col-md-12 money">
+									<div class="col-md-12">
+										<div class="col-md-5">
+											<h5>Net Asset Value:</h5>
+											<h4>
+												{{userprofile.summary.netAssetValue | currency}} <small
+													ng-class="{up: netAssetUp, down: !netAssetUp}">
+													({{userprofile.summary.delta}}%) <span ng-show="netAssetUp"
+													class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+													<span ng-show="!netAssetUp"
+													class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+												</small>
+											</h4>
+										</div>
+										<div class="col-md-3">
+											<h5>Portfolio Value:</h5>
+											{{userprofile.summary.totalPortfolio | currency}}
+										</div>
+										<div class="col-md-3">
+											<h5>Cash Available:</h5>
+											{{userprofile.summary.cash | currency}}
+										</div>
+									</div>
+								</div>
+								<!-- End of Portfolio statistics table -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div id="responsivePie" class="col-md-4">
+								<div style="display: block;">
+									<div style="margin-top: 0px" class="hc-pie"
+										items="limitedIdeas"></div>
+								</div>
+							</div>
+							<div id="responsiveStk" class="col-md-8">
+								<!-- 								<div id="stkchart" items="marketData"></div> -->
+								<div id="chartPV" class="chart-portfolio-value"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<a href="./trading.html"><button id="tradeSim"
+										class="btn btn-submit">Trading Simulator</button></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 ">
+					<div id="learningPanel" class="col-md-4">
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table" style="height: 300px;">
+									<tr>
+										<td colspan="2"><h3>
+												<a href="./library.html">Library</a>
+											</h3>
+											<h6>Most Recent News</h6></td>
+									</tr>
+									<tr>
+										<td><span class="glyphicon glyphicon-picture"></span></td>
+										<td><a
+											href="http://www.investopedia.com/university/become-your-own-financial-advisor/"
+											target="_blank">Become Your Own Financial Advisor</a></td>
+									</tr>
+									<tr>
+										<td class="tablelearning"><span
+											class="glyphicon glyphicon-picture"></span></td>
+										<td><a
+											href="http://www.investopedia.com/articles/investing/101915/dont-be-fooled-looking-only-mutual-fund-rankings.asp"
+											target="_blank">Don’t Be Fooled Looking at Only Mutual
+												Fund Rankings</a></td>
+									</tr>
+									<tr>
+										<td class="tablelearning"><span
+											class="glyphicon glyphicon-picture"></span></td>
+										<td><a
+											href="http://www.investopedia.com/articles/investing/101315/5-companies-benefiting-germanys-record-surplus.asp"
+											target="_blank">5 Companies Benefiting From Germany's
+												Record Surplus</a></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div id="leaderboardsPanel" class="col-md-3">
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table borderless">
+									 <tr>
+									<h3>Leaderboard</h3>
+									<h6>Rank amoung your connections</h6>
+									</tr>
+									<tr class="span2">
+										<td>You!</td>
+										<td class="text-right"><button class="leaderboardcolor">$200000</button></td>
+									</tr>
+									<tr class="span2">
+										<td>Ash</td>
+										<td class="text-right"><button class="leaderboardcolor">$150000</button></td>
+									</tr>
+									<tr class="span2">
+										<td>Misty</td>
+										<td class="text-right"><button class="leaderboardcolor">$100000</button></td>
+									</tr>
+									<tr class="span2">
+										<td>Broke</td>
+										<td class="text-right"><button class="leaderboardcolor">$75000</button></td>
+									</tr>
+									<tr class="span2">
+										<td>Trevor</td>
+										<td class="text-right"><button class="leaderboardcolor">$50000</button></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div id="connectionsPanel" class="col-md-4">
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table borderless" >
+									<h3>Connections</h3>
+									<h6>Frequently Contacted</h6>
+									<tr>
+										<td>Matt Kinsbrook</td>
+										<td style="text-align: right"><span
+											class="glyphicon glyphicon-record glyphicon-green"></span></td>
+									</tr>
+									<tr>
+										<td>Sherry Ali</td>
+										<td style="text-align: right"><span
+											class="glyphicon glyphicon-record glyphicon-green"></span></td>
+									</tr>
+									<tr>
+										<td>John Smith</td>
+										<td style="text-align: right"><span
+											class="glyphicon glyphicon-record"></span></td>
+									</tr>
+									<tr>
+										<td>Jane Doe</td>
+										<td style="text-align: right"><span
+											class="glyphicon glyphicon-record"></span></td>
+									</tr>
+									<tr>
+										<td>Jane Doe</td>
+										<td style="text-align: right"><span
+											class="glyphicon glyphicon-record"></span></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/dashboard.js"></script>
+</body>
+</html>
+
+

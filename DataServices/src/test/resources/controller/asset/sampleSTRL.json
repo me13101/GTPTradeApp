@@ -1,0 +1,15 @@
+{
+  "stocklist": [
+    {
+      "name": "STRL Inc",
+      "data": {
+        "delta": "-0.018731",
+        "stock_id": "STRL",
+        "datetime": "2015-10-20 15:50:00",
+        "price": 100.73,
+        "pricechange": "0.45"
+      },
+      "type": "stock"
+    }
+  ]
+}

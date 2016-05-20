@@ -1,0 +1,18 @@
+[
+  {
+    "txnId": 57,
+    "userId": 1,
+    "ticker": "AAPL",
+    "qty": 10,
+    "price": 100.00,
+    "total": 1000.00
+  },
+  {
+    "txnId": 58,
+    "userId": 1,
+    "ticker": "SMTH",
+    "qty": 5,
+    "price": 150.00,
+    "total": 750.00
+  }
+]

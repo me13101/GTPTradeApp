@@ -1,0 +1,50 @@
+[
+  {
+    "portfolioId": 3,
+    "userId": 4,
+    "portfolioDate": "2015-10-15 23:10:00",
+    "netAssetValue": 990823.40,
+    "cash": 9800000.40,
+    "portfolio": 10823.00
+  },
+  {
+    "portfolioId": 4,
+    "userId": 4,
+    "portfolioDate": "2015-10-14 23:10:00",
+    "netAssetValue": 959823.40,
+    "cash": 9500000.40,
+    "portfolio": 9823.00
+  },
+  {
+    "portfolioId": 1,
+    "userId": 4,
+    "portfolioDate": "2015-10-13 23:10:00",
+    "netAssetValue": 990823.40,
+    "cash": 9800000.40,
+    "portfolio": 10823.00
+  },
+  {
+    "portfolioId": 2,
+    "userId": 4,
+    "portfolioDate": "2015-10-12 23:10:00",
+    "netAssetValue": 1002823.40,
+    "cash": 9900000.40,
+    "portfolio": 12823.00
+  },
+  {
+    "portfolioId": 5,
+    "userId": 4,
+    "portfolioDate": "2015-10-11 23:10:00",
+    "netAssetValue": 9513823.40,
+    "cash": 9400000.40,
+    "portfolio": 13823.00
+  },
+  {
+    "portfolioId": 6,
+    "userId": 4,
+    "portfolioDate": "2015-10-10 23:10:00",
+    "netAssetValue": 9411823.40,
+    "cash": 9300000.40,
+    "portfolio": 11823.00
+  }
+]

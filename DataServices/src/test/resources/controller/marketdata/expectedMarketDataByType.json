@@ -1,0 +1,384 @@
+{
+  "stocklist": [
+    {
+      "name": "Sterling Constructn",
+      "data": {
+        "delta": "0.060096",
+        "stock_id": "STRL",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 13.23
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Tetra Pak Ltd",
+      "data": {
+        "delta": "0.012821",
+        "stock_id": "TTEK",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 25.28
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Parmalat",
+      "data": {
+        "delta": "0.20938",
+        "stock_id": "PLT",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 7.22
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Kite Pharma",
+      "data": {
+        "delta": "-0.035404",
+        "stock_id": "KITE",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 78.74
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Mediaset",
+      "data": {
+        "delta": "-0.02347",
+        "stock_id": "MS",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 23.3
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Irish Water Ltd",
+      "data": {
+        "delta": "-0.042037",
+        "stock_id": "IRWT",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 79.76
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Assicurazioni Gen",
+      "data": {
+        "delta": "0.13189",
+        "stock_id": "ARZGF",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 5.75
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Aviva",
+      "data": {
+        "delta": "-0.027567",
+        "stock_id": "AVV",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 24.34
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Eni",
+      "data": {
+        "delta": "-0.066185",
+        "stock_id": "ENI",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 16.79
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Huntsman Corp",
+      "data": {
+        "delta": "-0.102798",
+        "stock_id": "HUN",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 15.71
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Singapore Airlines",
+      "data": {
+        "delta": "0.042179",
+        "stock_id": "SIAL",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 11.86
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Nestle",
+      "data": {
+        "delta": "-0.022083",
+        "stock_id": "NESNY",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 56.24
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Sage Therapeutics",
+      "data": {
+        "delta": "-0.011403",
+        "stock_id": "SAGE",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 60.69
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Allegiant Travel",
+      "data": {
+        "delta": "0.062594",
+        "stock_id": "ALGT",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 21.22
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Gamesa Corp Tech",
+      "data": {
+        "delta": "-0.035533",
+        "stock_id": "GAM",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 15.2
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Allianz",
+      "data": {
+        "delta": "0.022584",
+        "stock_id": "ALVG",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 124.52
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Aquila Resources",
+      "data": {
+        "delta": "0.031761",
+        "stock_id": "AQAC",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 42.88
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Int Business Mach",
+      "data": {
+        "delta": "-0.001988",
+        "stock_id": "IBM",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 235.95
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Market Index",
+      "data": {
+        "delta": "0.000188",
+        "stock_id": "MAInd",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 106.67
+      },
+      "type": "index"
+    },
+    {
+      "name": "Euro Index",
+      "data": {
+        "delta": "0.002288",
+        "stock_id": "EUInd",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 109.53
+      },
+      "type": "index"
+    },
+    {
+      "name": "Exxon Mobil Corp",
+      "data": {
+        "delta": "0.021176",
+        "stock_id": "XOM",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 73.3
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Johnson & Johnson",
+      "data": {
+        "delta": "0.007101",
+        "stock_id": "JNJ",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 156.01
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Tesco PLC",
+      "data": {
+        "delta": "0.21203",
+        "stock_id": "TESO",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 8.06
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Tui",
+      "data": {
+        "delta": "0.003555",
+        "stock_id": "TUI",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 25.41
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Immobiliere Dass",
+      "data": {
+        "delta": "0.025358",
+        "stock_id": "FINA",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 40.84
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Apple Inc",
+      "data": {
+        "delta": "-0.009296",
+        "stock_id": "AAPL",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 116.16
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Continental",
+      "data": {
+        "delta": "0.002445",
+        "stock_id": "CONG",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 200.89
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Procter & Gamble",
+      "data": {
+        "delta": "-0.003788",
+        "stock_id": "PG",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 73.63
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Luxottica",
+      "data": {
+        "delta": "0.045403",
+        "stock_id": "LUX",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 64.24
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Bank Of Amer Corp",
+      "data": {
+        "delta": "-0.022252",
+        "stock_id": "BAC",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 21.97
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Towers Watson & Co",
+      "data": {
+        "delta": "-0.021975",
+        "stock_id": "TW",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 131.74
+      },
+      "type": "stock"
+    },
+    {
+      "name": "FIAT Chrysler Auto",
+      "data": {
+        "delta": "-0.178133",
+        "stock_id": "FCHA",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 13.38
+      },
+      "type": "stock"
+    },
+    {
+      "name": "UBS AG",
+      "data": {
+        "delta": "0.040751",
+        "stock_id": "UBS",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 19.41
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Building Cnstrct",
+      "data": {
+        "delta": "-0.049978",
+        "stock_id": "BCA",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 44.1
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Sunrise Telecom",
+      "data": {
+        "delta": "-0.003368",
+        "stock_id": "SRTI",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 32.55
+      },
+      "type": "stock"
+    },
+    {
+      "name": "DOW Chemicals Co",
+      "data": {
+        "delta": "0.004039",
+        "stock_id": "DOW",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 42.26
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Telecom Italia",
+      "data": {
+        "delta": "0.0",
+        "stock_id": "TLIT",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 18.74
+      },
+      "type": "stock"
+    },
+    {
+      "name": "Facebook Inc",
+      "data": {
+        "delta": "0.004175",
+        "stock_id": "FB",
+        "datetime": "2015-10-20 16:15:00",
+        "price": 88.99
+      },
+      "type": "stock"
+    }
+  ]
+}
